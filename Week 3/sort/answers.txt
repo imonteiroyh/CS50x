@@ -1,0 +1,11 @@
+sort1 uses: bubble sort
+
+How do you know?: In the test with the sorted5000.txt file, sort1 got the better performance.
+
+sort2 uses: merge sort
+
+How do you know?: In all tests, the time to sort with sort2 is nearly equal (and less than the time to sort with sort3), what is explained by it's complexity O(nlogn).
+
+sort3 uses: selection sort
+
+How do you know?: In all tests, the time to sort with sort3 is nearly equal (and bigger than the time to sort with sort2), what is explained by it's complexity O(n^2).

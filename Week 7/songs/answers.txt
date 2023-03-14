@@ -1,0 +1,4 @@
+The listener's audio aura is characterized by 0.65906 average energy, 0.484443 average valence and 0.71646 average danceability.
+
+I believe that the use of speechiness and loudness measures, in addition to the other measures would be a good consideration, since there
+are people who prefer slower or faster sounds, for example.

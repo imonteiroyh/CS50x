@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Dashboard
+{% endblock %}
+
+{% block main %}
+    <div style="display: flex; margin-bottom: 3vh;">
+        <div style="margin-left: auto; margin-right: 3vw;">
+            <form action="/search" method="post" class="d-flex">
+                <input autocomplete="off" class="form-control me-2" name="title" placeholder="Title" type="search">
+                <button class="btn btn-outline-primary" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="btn-group rounded" role="group">
+        <button type="button" class="btn btn-outline-primary active" id="movies-button">Movies</button>
+        <button type="button" class="btn btn-outline-primary" id="series-button">Series</button>
+    </div>
+
+    <form method="POST">
+        <main class="container py-5 text-center mobile">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col" class="media-image"></th>
+                        <th scope="col" class="text-start">Title</th>
+                        <th scope="col" class="text-end" id="seasons-header" style="display: none">Season</th>
+                        <th scope="col" class="text-end">Status</th>
+                        <th scope="col" class="text-end">Select</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for movie in movies %}
+                        <tr class="movies-row" id="{{ movie['imdbID'] }}">
+                            <td class="media-image"><img src="{{ movie['poster'] }}" style="max-height: 20vh; width: auto;"></td>
+                            <th scope="row" class="text-start">{{ movie["title"] }}</th>
+                            <td class="text-end">
+                                <select class="form-select status-select" data-id="{{ movie['imdbID'] }}">
+                                    <option value="Plan to Watch" {% if movie["status"] == "Plan to Watch" %}selected{% endif %}>Plan to Watch</option>
+                                    <option value="Watching" {% if movie["status"] == "Watching" %}selected{% endif %}>Watching</option>
+                                    <option value="On Hold" {% if movie["status"] == "On Hold" %}selected{% endif %}>On Hold</option>
+                                    <option value="Dropped" {% if movie["status"] == "Dropped" %}selected{% endif %}>Dropped</option>
+                                    <option value="Completed" {% if movie["status"] == "Completed" %}selected{% endif %}>Completed</option>
+                                </select>
+                            </td>
+                            <td class="text-end"><input type="checkbox" name="select-media" value="{{ movie }}"></td>
+                        </tr>
+                    {% endfor %}
+
+                    {% for serie in series %}
+                        <tr class="series-row" id="{{ serie['imdbID'] }}" style="display: none">
+                            <td class="media-image"><img src="{{ serie['poster'] }}" style="max-height: 20vh; width: auto;"></td>
+                            <th scope="row" class="text-start">{{ serie["title"] }}</th>
+                            <td scope="row" class="text-end">
+                                <div style="display: inline-block;">
+                                    <button type="button" class="btn btn-primary" id="increment-season" data-id="{{ serie['imdbID'] }}"></button>
+                                    <span class="user-season">{{ serie["user_season"] }}</span>
+                                </div>
+                                <div style="float: right;">
+                                    {{ "/" }}{{serie["total_seasons"] }}
+                                </div>
+                            </td>
+                            <td class="text-end">
+                                <select class="form-select status-select" data-id="{{ serie['imdbID'] }}">
+                                    <option value="Plan to Watch" {% if serie["status"] == "Plan to Watch" %}selected{% endif %}>Plan to Watch</option>
+                                    <option value="Watching" {% if serie["status"] == "Watching" %}selected{% endif %}>Watching</option>
+                                    <option value="On Hold" {% if serie["status"] == "On Hold" %}selected{% endif %}>On Hold</option>
+                                    <option value="Dropped" {% if serie["status"] == "Dropped" %}selected{% endif %}>Dropped</option>
+                                    <option value="Completed" {% if serie["status"] == "Completed" %}selected{% endif %}>Completed</option>
+                                </select>
+                            </td>
+                            <td class="text-end"><input type="checkbox" name="select-media" value="{{ serie }}"></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </main>
+        <button class="btn btn-outline-primary" id="remove-selected-media-button" type="button" style="margin-bottom: 1vh;">Remove Selected Media</button>
+        <button class="btn btn-outline-primary" id="reset-selected-media-button" type="button" style="margin-bottom: 1vh;">Reset Selected Media</button>
+    </form>
+{% endblock %}

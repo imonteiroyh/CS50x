@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+    <main class="container py-5 text-center">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-start">Symbol</th>
+                    <th scope="col" class="text-start">Name</th>
+                    <th scope="col" class="text-end">Shares</th>
+                    <th scope="col" class="text-end">Price</th>
+                    <th scope="col" class="text-end">TOTAL</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for stock in stocks if not stock["shares"] == 0 %}
+                    <tr>
+                        <th scope="row" class="text-start">{{ stock["symbol"] }}</th>
+                        <td class="text-start">{{ stock["name"] }}</td>
+                        <td class="text-end">{{ stock["shares"] }}</td>
+                        <td class="text-end">{{ prices[stock["symbol"]]["price"] }}</td>
+                        <td class="text-end">{{ prices[stock["symbol"]]["total"] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td class="border-0 fw-bold text-end" colspan="4">Cash</td>
+                    <td class="border-0 text-end">{{ cash }}</td>
+                </tr>
+                <tr>
+                    <td class="border-0 fw-bold text-end" colspan="4">TOTAL</th>
+                    <td class="border-0 w-bold text-end">{{ total }}</th>
+                </tr>
+            </tfoot>
+        </table>
+    </main>
+{% endblock %}

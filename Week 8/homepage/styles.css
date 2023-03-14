@@ -1,0 +1,43 @@
+.pagename {
+    margin: auto;
+    width: 70%;
+    font-family: "Georgia";
+    color: black;
+    background-color: #EAECEE;
+    border-radius: 30px 30px 30px 30px;
+}
+
+.principal {
+    margin: auto;
+    font-family: "Copperplate";
+    font-size: 25px;
+    color: black;
+    width: 80%;
+}
+
+.description {
+    margin: auto;
+    font-family: "Copperplate";
+    font-size: 14px;
+    color: black;
+    width: 80%
+}
+
+.projects {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Copperplate";
+    font-size: 14px;
+}
+
+.button {
+    float: left;
+    margin: 10px 10px;
+    padding: 10px 10px;
+    height: auto;
+    border: 1px solid;
+    border-radius: 7px;
+    color: black;
+    background: #EAECEE;
+}

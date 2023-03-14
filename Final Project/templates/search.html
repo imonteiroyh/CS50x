@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Dashboard
+{% endblock %}
+
+{% block main %}
+    <div style="display: flex; margin-bottom: 3vh;">
+        <div style="margin-left: auto; margin-right: 3vw;">
+            <form action="/search" method="post" class="d-flex">
+                <input autocomplete="off" class="form-control me-2" name="title" placeholder="Title" type="search">
+                <button class="btn btn-outline-primary" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <form method="POST" action="/add_media">
+        <main class="container py-5 text-center">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col" class="media-image"></th>
+                        <th scope="col" class="text-start">Title</th>
+                        <th scope="col" class="text-end">Type</th>
+                        <th scope="col" class="text-end">Year</th>
+                        <th scope="col" class="text-end">Select</th>
+                    </tr>
+                </thead>
+                <tbody style="margin-top: 10vh;">
+                        {% for media in medias %}
+                            <tr id="medias-row">
+                                <td class="media-image"><img src="{{ media['Poster'] }}" style="max-height: 20vh; width: auto;"></td>
+                                <th scope="row" class="text-start">{{ media["Title"] }}</th>
+                                <td scope="row" class="text-end">{{ media["Type"] }}</td>
+                                <td class="text-end">{{ media["Year"] }}</td>
+                                <td class="text-end"><input type="checkbox" name="select-media" value="{{ media }}"></td>
+                            </tr>
+                        {% endfor %}
+                </tbody>
+            </table>
+        </main>
+        <button class="btn btn-outline-primary" type="submit">Add Selected Media</button>
+    </form>
+
+{% endblock %}
